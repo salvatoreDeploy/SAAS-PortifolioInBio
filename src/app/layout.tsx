@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" className={`${hedHatDisplay.variable}`}>
-      <body className="bg-primary antialiased">{children}</body>
+    <html lang="pt-BR" className={`${hedHatDisplay.variable}`}>
+      <body className="bg-primary text-body antialiased">{children}</body>
     </html>
   );
 }
