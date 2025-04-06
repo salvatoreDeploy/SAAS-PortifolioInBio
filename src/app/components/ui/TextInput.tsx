@@ -8,7 +8,7 @@ export default function TextInput({ className, ...props }: InputProps) {
     <input
       {...props}
       className={twMerge(
-        "w-full bg-secondary text-heading placeholder:text-placeholder rounded-xl border border-transparent hover:border-secondary hover:text-body active:border-tertiary",
+        "w-full p-3 bg-secondary text-heading placeholder:text-placeholder rounded-xl border border-transparent hover:border-secondary hover:text-body active:border-tertiary",
         className
       )}
     />
