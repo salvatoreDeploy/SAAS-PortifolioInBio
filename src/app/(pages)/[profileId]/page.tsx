@@ -4,6 +4,7 @@ import { ProjectCard } from "@/app/components/commons/ProjectCard";
 import { TotalVisits } from "@/app/components/commons/TotalVisits";
 import UserCard from "@/app/components/commons/UserCard";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 
 export default function ProfilePage() {
@@ -15,7 +16,11 @@ export default function ProfilePage() {
     <div className="relative h-screen flex p-20 overflow-hidden">
       <div className="fixed top-0 left-0 w-full flex justify-center items-center gap-1 py-2 bg-tertiary">
         <span>Voce esta usando a versão trial</span>
-        <button className="text-green font-bold">Faça o upgrade agora!</button>
+        <Link href={`/${profileId}/upgrade`}>
+          <button className="text-green font-bold">
+            Faça o upgrade agora!
+          </button>
+        </Link>
       </div>
       <div className="w-1/2 flex justify-center h-min">
         <UserCard />
