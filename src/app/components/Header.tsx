@@ -1,11 +1,9 @@
-import { Auth } from "../http/manage-auth";
+import { Auth } from "../server/manage-auth";
 import { auth } from "../lib/auth";
 import Button from "./ui/Button";
 
 export default async function Header() {
-  const session = await auth()
-
-  console.log(session)
+  const session = await auth();
 
   return (
     <div className="absolute top-0 left-0 right-0 max-w-7xl mx-auto flex items-center justify-between py-10">
@@ -16,9 +14,7 @@ export default async function Header() {
       </div>
 
       <div className="flex items-center gap-4">
-        {
-        session &&  <Button>Minha página</Button>
-        }
+        {session && <Button>Minha página</Button>}
         <form action={Auth}>
           <Button>{session ? "Sair" : "Login"}</Button>
         </form>

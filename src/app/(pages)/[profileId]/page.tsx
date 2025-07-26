@@ -1,16 +1,18 @@
-"use client";
-
 import { ProjectCard } from "@/app/components/commons/ProjectCard";
 import { TotalVisits } from "@/app/components/commons/TotalVisits";
 import UserCard from "@/app/components/commons/UserCard";
+import { getProfileData } from "@/app/server/getProfileData";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 
-export default function ProfilePage() {
-  const params = useParams();
+export default async function ProfilePage({
+  params,
+}: {
+  params: Promise<{ profileId: string }>;
+}) {
+  const { profileId } = await params;
 
-  const profileId = params.profileId;
+  const profileData = await getProfileData(profileId);
 
   return (
     <div className="relative h-screen flex p-20 overflow-hidden">
