@@ -28,8 +28,10 @@ export function NewProject({ projectId }: NewProjectProps) {
         <span>Novo projeto</span>
       </button>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-        <div className="bg-secondary p-8 rounded-[20px] flex flex-col justify-between gap-10">
-          <p className="text-heading font-bold text-xl">Novo projeto</p>
+        <Modal.Content className="bg-primary p-8 rounded-[20px] flex flex-col justify-between gap-10 border border-secondary/60 w-full max-w-[680px]">
+          <Modal.Title className="text-heading font-bold text-xl">
+            Novo projeto
+          </Modal.Title>
           <div className="flex gap-10">
             <div className="flex flex-col items-center gap-3 text-xs">
               <div className="w-[100px] h-[100px] rounded-xl bg-tertiary overflow-hidden">
@@ -84,10 +86,10 @@ export function NewProject({ projectId }: NewProjectProps) {
             </div>
           </div>
           <div className="flex gap-4 justify-end">
-            <button className="font-bold text-heading">Voltar</button>
+            <Modal.Close className="font-bold text-heading">Voltar</Modal.Close>
             <Button>Salvar</Button>
           </div>
-        </div>
+        </Modal.Content>
       </Modal>
     </>
   );
