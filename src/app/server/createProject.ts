@@ -5,6 +5,9 @@ import { auth } from "../lib/auth"
 import { database } from "../lib/firebase"
 import { randomUUID } from "node:crypto"
 
+
+/* TODO: Isolar componente API do CloudFlare */
+
 // Configuração do cliente R2 usando AWS SDK
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3"
 
