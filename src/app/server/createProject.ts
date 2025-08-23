@@ -9,7 +9,8 @@ import { randomUUID } from "node:crypto"
 /* TODO: Isolar componente API do CloudFlare */
 
 // Configuração do cliente R2 usando AWS SDK
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3"
+import { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3"
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 const r2Client = new S3Client({
   region: "auto",
@@ -84,16 +85,33 @@ export async function createProject(formData: FormData) {
   }
 }
 
-/* 
+
 
 // Função auxiliar para obter URL da imagem do R2
-export async function getImageUrl(imagePath: string): Promise<string> {
-  // Se você configurou um domínio personalizado para o R2
-  return `https://your-r2-domain.com/${imagePath}`
+
+ /**
+   * Gera URL de download temporária (assinada)
+   * @param {string} fileName - Nome do arquivo no bucket
+   * @param {number} expiresIn - Tempo de expiração em segundos (padrão: 1 hora)
+   * @returns {Promise<string>} URL de download assinada
+   */
+  export async function generateSignedDownloadUrl(fileName: string, expiresIn: number = 3600): Promise<string> {
+    try {
+      const command = new GetObjectCommand({
+        Bucket: process.env.R2_BUCKET_NAME!,
+        Key: fileName,
+        ResponseContentDisposition: `attachment; filename="${fileName}"`, // Força download
+      });
+
+      const signedUrl = await getSignedUrl(r2Client, command, {
+        expiresIn: expiresIn,
+      });
+
+      return signedUrl;
+    } catch (error) {
+      throw new Error(`Erro ao gerar URL assinada`);
+    }
+  }
   
-  // Ou se estiver usando a URL padrão do R2
-  // return `https://your-account-id.r2.cloudflarestorage.com/your-bucket/${imagePath}`
-} 
-  
-*/
+
 

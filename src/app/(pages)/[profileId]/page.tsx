@@ -7,6 +7,8 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { NewProject } from "./newProject";
+import { getProfileProjectData } from "@/app/server/getProfileProjectsData";
+import { generateSignedDownloadUrl } from "@/app/server/createProject";
 
 type ProfilePageParams = {
   params: Promise<{ profileId: string }>;
@@ -20,6 +22,8 @@ export default async function ProfilePage({ params }: ProfilePageParams) {
   if (!profileData) {
     return notFound();
   }
+
+  const projects = await getProfileProjectData(profileId);
 
   const session = await auth();
 
@@ -40,13 +44,14 @@ export default async function ProfilePage({ params }: ProfilePageParams) {
       </div>
 
       <div className="w-full flex justify-center content-start gap-4 flex-wrap overflow-y-auto">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        {projects.map(async (project) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            isOwner={isOwner}
+            img={await generateSignedDownloadUrl(project.imagePath)}
+          />
+        ))}
 
         {isOwner && <NewProject projectId={profileId} />}
       </div>
