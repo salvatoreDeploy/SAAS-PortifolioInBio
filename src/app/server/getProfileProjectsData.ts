@@ -1,6 +1,5 @@
 import { database } from "../lib/firebase";
 
-
 export type ProjectData = {
   id: string
   userId: string
