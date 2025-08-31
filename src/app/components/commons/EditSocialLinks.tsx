@@ -8,12 +8,21 @@ import Button from "../ui/Button";
 import { useParams, useRouter } from "next/navigation";
 import { createSocialLinks } from "@/app/server/createSocialLinks";
 
-export default function EditSocialLinks() {
+interface SocialMediasParams {
+  socialMedias?: {
+    github: string;
+    instagram: string;
+    linkedin: string;
+    twitter: string;
+  };
+}
+
+export default function EditSocialLinks({ socialMedias }: SocialMediasParams) {
   const [isOpen, setIsOpen] = useState(false);
-  const [github, setGithub] = useState("");
-  const [instagram, setInstagram] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [twitter, setTwitter] = useState("");
+  const [github, setGithub] = useState(socialMedias?.github || "");
+  const [instagram, setInstagram] = useState(socialMedias?.instagram || "");
+  const [linkedin, setLinkedin] = useState(socialMedias?.linkedin || "");
+  const [twitter, setTwitter] = useState(socialMedias?.twitter || "");
 
   const router = useRouter();
 
