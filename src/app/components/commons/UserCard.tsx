@@ -3,6 +3,7 @@ import Button from "../ui/Button";
 import EditSocialLinks from "./EditSocialLinks";
 import Link from "next/link";
 import { ProfileDataResponse } from "@/app/server/getProfileData";
+import AddCustomLink from "./AddCustomLink";
 
 export default function UserCard({
   profileData,
@@ -83,9 +84,7 @@ export default function UserCard({
         <div className="flex flex-col gap-3 w-full h-[172px]">
           <div className="w-full flex flex-col items-center gap-3">
             <Button className="w-full">Template SaaS - Compre Agora</Button>
-            <button className="p-3 rounded-xl bg-[#1E1E1E] hover:bg-[#2E2E2E]">
-              <Plus />
-            </button>
+            <AddCustomLink />
           </div>
         </div>
       </div>
